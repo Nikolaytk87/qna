@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_question, only: %i[new create]
 
   def new
@@ -7,10 +8,21 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params)
+    @answer.user = current_user
     if @answer.save
-      redirect_to @answer
+      redirect_to @question, notice: 'You have successfully created the answer'
     else
       render :new
+    end
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    if current_user.author_of?(@answer)
+      @answer.destroy
+      redirect_to @answer.question, notice: 'You have successfully remove answer'
+    else
+      flash[:notice] = 'Failed to delete question'
     end
   end
 

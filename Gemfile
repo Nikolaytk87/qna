@@ -23,7 +23,10 @@ gem 'net-http'
 # Use Active Model has_secure_password
 gem 'bcrypt'
 gem 'slim-rails'
-
+gem 'devise'
+gem 'html2slim'
+gem 'bootstrap', '~>5.2'
+gem 'jquery-rails', '~>4.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -57,6 +60,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'webdrivers'
+  gem 'launchy'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,0 +1,7 @@
+p= link_to  "Ask question", new_question_path
+p Questions:
+table.table.table-bordered.text-center
+  tr.table-primary.border-primary
+    th Title
+    th Body
+  = render @questions
