@@ -305,7 +305,7 @@ DEPENDENCIES
   factory_bot_rails
   html2slim
   jbuilder (~> 2.7)
-  jquery-rails (~> 4.5)
+  jquery-rails
   launchy
   listen (~> 3.3)
   net-http

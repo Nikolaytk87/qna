@@ -7,7 +7,7 @@ feature 'User can create answer', "
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     background do
       sign_in(user)
       visit question_path(question)
@@ -28,11 +28,9 @@ feature 'User can create answer', "
     end
   end
 
-  scenario 'Unauthenticated user tries to create Answer' do
+  scenario 'Unauthenticated user tries to create Answer', js: true do
     visit question_path(question)
-    fill_in 'answer_body', with: 'Answer to Question'
-    click_on 'Answer'
 
-    expect(page).to have_current_path new_user_session_path
+    expect(page).to_not have_content 'New Answer'
   end
 end

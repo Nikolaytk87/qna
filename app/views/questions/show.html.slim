@@ -9,4 +9,5 @@ p
 h2 Answers:
 = render @question.answers
 - if user_signed_in?
+  p New Answer:
   = render 'answers/form'
