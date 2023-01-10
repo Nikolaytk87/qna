@@ -9,19 +9,22 @@ feature 'Authenticate user can remove his answer', "
   given(:question) { create(:question, user: author) }
   given!(:answer) { create(:answer, user: author, question: question) }
 
-  scenario 'Authenticate user can remove his answer' do
+  scenario 'Authenticate user can remove his answer', js: true do
     sign_in(author)
     visit question_path(question)
-    click_on 'Remove Answer'
-
-    expect(page).to have_content 'You have successfully remove answer'
+    accept_alert do
+      click_on 'Remove Answer'
+    end
+    expect(page).to_not have_content answer.body
   end
 
   scenario "Authenticate user  remove other people's  answer" do
     sign_in(user)
     visit question_path(question)
 
-    expect(page).to_not have_link 'Remove Answer'
+    within '.answers' do
+      expect(page).to_not have_link 'Remove Answer'
+    end
   end
 
   scenario 'Unauthenticate user  remove  answer' do

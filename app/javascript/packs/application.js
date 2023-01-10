@@ -3,8 +3,12 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 //= require jquery3
+//= require twitter/bootstrap
 //= require popper
 //= require bootstrap-sprockets
+
+require("packs/utilities/answers")
+require("packs/utilities/questions")
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"

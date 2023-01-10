@@ -95,14 +95,14 @@ RSpec.describe QuestionsController, type: :controller do
         expect(assigns(:question)).to eq question
       end
       it 'changes question attributes' do
-        patch :update, params: { id: question, question: { title: 'new_title', body: 'new_body' } }
+        patch :update, params: { id: question, question: { title: 'new_title', body: 'new_body' }, format: :js }
         question.reload
         expect(question.title).to eq 'new_title'
         expect(question.body).to eq 'new_body'
       end
       it 'redirects to updated question' do
         patch :update, params: valid_question_params
-        expect(response).to redirect_to question
+        expect(response).to render_template :update
       end
     end
 
@@ -115,18 +115,18 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.title).to eq 'MyString'
         expect(question.body).to eq 'MyText'
       end
-      it 're renders edit view' do
-        expect(response).to render_template :edit
+      it 'render update' do
+        expect(response).to render_template :update
       end
     end
   end
 
   def valid_question_params
-    { id: question, question: attributes_for(:question) }
+    { id: question, question: attributes_for(:question), format: :js }
   end
 
   def invalid_question_params
-    { id: question, question: attributes_for(:question, :invalid), user: user }
+    { id: question, question: attributes_for(:question, :invalid), user: user, format: :js }
   end
 
   describe 'DELETE #destroy' do

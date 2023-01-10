@@ -17,7 +17,7 @@ feature 'User can create answer', "
       fill_in 'answer_body', with: 'Answer to Question'
       click_on 'Answer'
 
-      expect(page).to have_content 'You have successfully created the answer'
+      expect(page).to have_content 'Answers:'
     end
 
     scenario 'creates answer with invalid params' do
