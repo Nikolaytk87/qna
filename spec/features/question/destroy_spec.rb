@@ -8,15 +8,16 @@ feature 'Authenticate user can remove his question', "
   given(:author) { create(:user) }
   given!(:question) { create(:question, user: author) }
 
-  scenario 'Authenticate user can remove his question' do
+  scenario 'Authenticate user can remove his question', js: true do
     sign_in(author)
     visit question_path(question)
-    click_on 'Remove Question'
-
+    accept_alert do
+      click_on 'Remove Question'
+    end
     expect(page).to have_content 'You have successfully remove question'
   end
 
-  scenario "Authenticate user  remove other people's  question" do
+  scenario "Authenticate user  remove other people's  question", js: true do
     sign_in(user)
     visit question_path(question)
 
