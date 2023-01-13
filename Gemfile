@@ -26,6 +26,7 @@ gem 'slim-rails'
 gem 'devise'
 gem 'html2slim'
 gem 'bootstrap', '~>5.2'
+gem "aws-sdk-s3", require: false
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
