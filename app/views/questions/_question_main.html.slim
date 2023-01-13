@@ -5,7 +5,7 @@
   .q-body
     p= @question.body
 
-  p = render 'shared/attachments', resource: @question
+  = render 'shared/attachments', resource: @question
 
   div class=["question-error-#{@question.id}"]
   - if current_user&.author_of?(@question)
