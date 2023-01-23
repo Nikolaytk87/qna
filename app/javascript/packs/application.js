@@ -9,6 +9,7 @@
 
 require("packs/utilities/answers")
 require("packs/utilities/questions")
+require("@nathanvda/cocoon")
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"

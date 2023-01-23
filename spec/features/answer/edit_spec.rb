@@ -39,7 +39,7 @@ feature 'User can edit his answer', "
         within '.answers' do
           click_on 'Edit'
 
-          fill_in 'Body', with: 'body body body'
+          fill_in 'Your answer', with: 'body body body'
           attach_file 'File', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
 
           click_on 'Save'
@@ -64,7 +64,7 @@ feature 'User can edit his answer', "
       scenario 'edits his answer with errors' do
         within '.answers' do
           click_on 'Edit'
-          fill_in 'Body',	with: ''
+          fill_in 'Your answer',	with: ''
           click_on 'Save'
         end
 
