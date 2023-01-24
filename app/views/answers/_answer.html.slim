@@ -1,19 +1,31 @@
-.answer id="answer_#{answer.id}"
-  p= answer.body
-  = render 'shared/attachments', resource: answer
+- if answer.persisted?
+  .answer id="answer_#{answer.id}"
+    p= answer.body
+    .links
+      p Links:
+      ul
+        =render 'shared/links', resource: answer
 
-  - if user_signed_in? && current_user&.author_of?(answer.question)
-    p= link_to "Best answer", best_answer_path(answer), remote: true, method: :patch
+    = render 'shared/attachments', resource: answer
 
-  - if user_signed_in? && answer.persisted? && current_user&.author_of?(answer)
-    p= link_to "Remove Answer", answer_path(answer),   method: :delete, data: {confirm: "Are you sure?"}
-    p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+    - if user_signed_in? && current_user&.author_of?(answer.question)
+      p= link_to "Best answer", best_answer_path(answer), remote: true, method: :patch
 
-  = form_with model: answer, local: false, class: 'hidden', html: {id: "edit-answer-#{answer.id}"}, direct_upload: true do |f|
-    p
-      = f.label :body, 'Your answer'
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true
-    = f.submit 'Save'
+    - if user_signed_in? && answer.persisted? && current_user&.author_of?(answer)
+      p= link_to "Remove Answer", answer_path(answer),   method: :delete, data: {confirm: "Are you sure?"}
+      p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+
+    = form_with model: answer, local: false, class: 'hidden', html: {id: "edit-answer-#{answer.id}"}, direct_upload: true do |f|
+      p
+        = f.label :body, 'Your answer'
+        = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true
+      p
+        #links
+          = f.fields_for :links do |l|
+          .add_link
+            = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+
+      = f.submit 'Save'

@@ -4,6 +4,10 @@
     h5= @question.title
   .q-body
     p= @question.body
+  .links
+  p Links:
+  ul
+    =render 'shared/links', resource: @question
 
   = render 'shared/attachments', resource: @question
 
@@ -20,4 +24,9 @@
       = f.text_area :body
       = f.label :files
       = f.file_field :files, multiple: true
+      p
+        #links
+          = f.fields_for :links do |l|
+          .add_link
+            = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
       = f.submit 'Save'
